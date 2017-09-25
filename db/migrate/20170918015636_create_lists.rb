@@ -1,11 +1,12 @@
 class CreateLists < ActiveRecord::Migration
   def change
     create_table :lists do |t|
-      t.integer :user_ID
-      t.integer :list_ID
-      t.string :listname
+      t.string :name
+      t.references :user, index: true
+      t.string :permissions, default: 'private'
 
       t.timestamps null: false
     end
+    add_foreign_key :lists, :users
   end
 end
